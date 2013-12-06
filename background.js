@@ -1,5 +1,11 @@
 var pattern = /(github.com\/[^/]+\/[^/]+\/)(blob|edit|blame|commits|raw)/;
 
+var syntax = {
+  ".js": "javascript",
+  ".html": "html",
+  ".css": "css"
+};
+
 var sendToCaret = function(command, argument) {
   var message = {
     command: command,
@@ -13,6 +19,8 @@ var sendToCaret = function(command, argument) {
 chrome.tabs.onUpdated.addListener(function(tabID, change, tab) {
   if (pattern.test(tab.url)) {
     chrome.pageAction.show(tabID);
+  } else {
+    chrome.pageAction.hide(tabID);
   }
 });
 
@@ -24,6 +32,10 @@ chrome.pageAction.onClicked.addListener(function(tab) {
   xhr.onload = function() {
     var text = xhr.responseText;
     sendToCaret("session:new-file", text);
+    var s = url.match(/(\.\w+$)/);
+    if (s && s[1] in syntax) {
+      sendToCaret("session:syntax", syntax[s[1]]);
+    }
   };
   xhr.send();
 });
