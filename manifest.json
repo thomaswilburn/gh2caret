@@ -3,10 +3,10 @@
   "name": "To Caret, From Github",
   "short_name": "GH2Caret",
   "description": "A demo plugin that sends Github source to a new Caret tab.",
-  "version": "1.0",
+  "version": "1.0.2",
   
   "permissions": [
-    "https://*.github.com/*",
+    "https://*.github.com/",
     "tabs"
   ],
   "page_action": {
