@@ -6,8 +6,7 @@
   "version": "1.0",
   
   "permissions": [
-    "https://github.com/*",
-    "https://raw.github.com/*",
+    "https://*.github.com/*",
     "tabs"
   ],
   "page_action": {
