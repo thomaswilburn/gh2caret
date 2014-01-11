@@ -6,10 +6,11 @@ var syntax = {
   ".css": "css"
 };
 
-var sendToCaret = function(command, argument) {
+var sendToCaret = function(command, argument, quiet) {
   var message = {
     command: command,
-    argument: argument
+    argument: argument,
+    quiet: quiet
   };
   ["nllpfnakhpmhjggbagjgemckanoangnd", "fljalecfjciodhpcledpamjachpmelml"].forEach(function(id) {
     chrome.runtime.sendMessage(id, message);
@@ -64,7 +65,7 @@ var sendFortune = function() {
     "Very doubtful"
   ];
   var pick = fortunes[Math.floor(Math.random() * fortunes.length)];
-  sendToCaret("status:toast", pick);
+  sendToCaret("status:toast", pick, true);
   setTimeout(sendFortune, 60 * 1000)
 };
 
